@@ -25,11 +25,11 @@ int main(void) {
         } while (choice < 1 || choice > 11);
 
         switch (choice) {
-            case 1:
+            case LOAD:
                 load(&root);
                 break;
 
-            case 2:
+            case STORE:
                 if (!isEmpty(root)) {
                     file = fopen(CSV_FILE_PATH, "w");
                     fprintf(file, "Film Title, Director, Description, Genre, Running Time, Year, Times Played, Rating\n");
@@ -41,36 +41,42 @@ int main(void) {
                 }
                 break;
 
-            case 3:
+            case DISPLAY:
                 display(root);
                 system("pause");
                 break;
-            case 4:
 
+            case INSERT:
                 break;
-            case 5:
 
+            case DELETE:
                 break;
-            case 6:
+
+            case EDIT:
                 edit(root);
                 break;
-            case 7:
 
+            case SORT:
                 break;
-            case 8:
+
+            case RATE:
                 rate(root);
                 break;
-            case 9:
+
+            case PLAY:
                 play(root);
                 break;
-            case 10:
 
+            case SHUFFLE:
                 break;
-            case 11:
+
+            case EXIT:
                 done = 1;
                 break;
         }
     }
+
+    //save on exit
     file = fopen(CSV_FILE_PATH, "w");
     fprintf(file, "Film Title, Director, Description, Genre, Running Time, Year, Times Played, Rating\n");
     store(root, file);
