@@ -296,15 +296,15 @@ void play(Node *root) {
 
     while (current != NULL) {
         system("cls");
-        puts(current->data.title);
-        puts(current->data.director);
-        puts(current->data.description);
-        puts(current->data.genre);
-        printf("%d:%d\n", current->data.duration.hours,
+        printf("Title: %s\n", current->data.title);
+        printf("Director: %s\n", current->data.director);
+        printf("Description: %s\n", current->data.description);
+        printf("Genre: %s\n", current->data.genre);
+        printf("duration: %d:%d\n", current->data.duration.hours,
                         current->data.duration.minutes);
-        printf("%d\n", current->data.year);
-        printf("%d\n", current->data.n_played);
-        printf("%d\n", current->data.rating);
+        printf("year: %d\n", current->data.year);
+        printf("Times played: %d\n", current->data.n_played);
+        printf("Rating: %d\n", current->data.rating);
 
         delay(2);
         current = current->next;
@@ -313,15 +313,15 @@ void play(Node *root) {
     current = root;
     while (strcmp(current->data.title, title)) {
         system("cls");
-        puts(current->data.title);
-        puts(current->data.director);
-        puts(current->data.description);
-        puts(current->data.genre);
-        printf("%d:%d\n", current->data.duration.hours,
+        printf("Title: %s\n", current->data.title);
+        printf("Director: %s\n", current->data.director);
+        printf("Description: %s\n", current->data.description);
+        printf("Genre: %s\n", current->data.genre);
+        printf("duration: %d:%d\n", current->data.duration.hours,
                         current->data.duration.minutes);
-        printf("%d\n", current->data.year);
-        printf("%d\n", current->data.n_played);
-        printf("%d\n", current->data.rating);
+        printf("year: %d\n", current->data.year);
+        printf("Times played: %d\n", current->data.n_played);
+        printf("Rating: %d\n", current->data.rating);
 
         delay(2);
         current = current->next;
@@ -344,4 +344,56 @@ void delay(unsigned int secs) {
 
         // exit after seconds have passed
     } while (difftime(current, start) < secs);
+}
+
+void menu_selection(Node **root, int choice) {
+    FILE *file = NULL;
+
+    switch (choice) {
+        case LOAD:
+            load(root);
+            break;
+
+        case STORE:
+            file = fopen(CSV_FILE_PATH, "w");
+            if (file != NULL) {
+                fprintf(file, "Film Title, Director, Description, Genre, Running Time, Year, Times Played, Rating\n");
+                store(*root, file);
+                fclose(file);
+                puts("Data stored successfully");
+                system("pause");
+            } else {
+                puts("Looks like something went wrong");
+            }
+            break;
+
+        case DISPLAY:
+            display(*root);
+            system("pause");
+            break;
+
+        case INSERT:
+            break;
+
+        case DELETE:
+            break;
+
+        case EDIT:
+            edit(*root);
+            break;
+
+        case SORT:
+            break;
+
+        case RATE:
+            rate(*root);
+            break;
+
+        case PLAY:
+            play(*root);
+            break;
+
+        case SHUFFLE:
+            break;
+    }
 }

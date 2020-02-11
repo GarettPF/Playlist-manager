@@ -10,8 +10,6 @@
 
 int main(void) {
     int done = 0, choice;
-    FILE *file = NULL;
-
     Node *root = NULL;
 
     while (!done) {
@@ -24,64 +22,27 @@ int main(void) {
             scanf(" %d", &choice);
         } while (choice < 1 || choice > 11);
 
-        switch (choice) {
-            case LOAD:
-                load(&root);
-                break;
-
-            case STORE:
-                if (!isEmpty(root)) {
-                    file = fopen(CSV_FILE_PATH, "w");
-                    fprintf(file, "Film Title, Director, Description, Genre, Running Time, Year, Times Played, Rating\n");
-                    store(root, file);
-                    fclose(file);
-                } else {
-                    puts("List is empty\n");
-                    system("pause");
-                }
-                break;
-
-            case DISPLAY:
-                display(root);
-                system("pause");
-                break;
-
-            case INSERT:
-                break;
-
-            case DELETE:
-                break;
-
-            case EDIT:
-                edit(root);
-                break;
-
-            case SORT:
-                break;
-
-            case RATE:
-                rate(root);
-                break;
-
-            case PLAY:
-                play(root);
-                break;
-
-            case SHUFFLE:
-                break;
-
-            case EXIT:
-                done = 1;
-                break;
+        // check if list is empty
+        if (isEmpty(root) && choice != 1) {
+            puts("List is empty\n");
+            system("pause");
+        } else if (choice == EXIT) {
+            done = 1;
+        } else {
+            menu_selection(&root, choice);
         }
     }
 
     //save on exit
-    file = fopen(CSV_FILE_PATH, "w");
-    fprintf(file, "Film Title, Director, Description, Genre, Running Time, Year, Times Played, Rating\n");
-    store(root, file);
-    fclose(file);
-
+    FILE *file = fopen(CSV_FILE_PATH, "w");
+    if (file != NULL) {
+        fprintf(file, "Film Title, Director, Description, Genre, Running Time, Year, Times Played, Rating\n");
+        store(root, file);
+        fclose(file);
+    } else {
+        puts("Data was not saved :(");
+        system("pause");
+    }
     system("cls");
     printf("Goodbye :)\n");
 

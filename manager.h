@@ -1,3 +1,6 @@
+#ifndef _MANAGER_H_
+#define _MANAGER_H_
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -41,7 +44,7 @@ typedef struct node {
     struct node *next;
 } Node;
 
-// ############# NODE FUNCTIONS ##############
+// ############# NODE FUNCTIONS ########################################
 
 /*
 Function: isEmpty
@@ -61,7 +64,7 @@ Description: Pushes the values into a new node
 */
 int push(Node **root_ptr, Record values);
 
-// ############# PLAYLIST FUNCTIONS ############
+// ############# PLAYLIST FUNCTIONS ####################################
 
 /*
 Function: load
@@ -133,3 +136,14 @@ Description: The delay function to be the way to delay the movies
     @return                 void
 */
 void delay(unsigned int secs);
+
+/*
+Function: menu_selection
+Description: Determines what to do with the user given choice
+    @param *root            root ptr to the linked list
+    @param choice           given input choice
+    @return                 void
+*/
+void menu_selection(Node **root, int choice);
+
+#endif // #ifndef _MANAGER_H_
