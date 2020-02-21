@@ -373,6 +373,7 @@ void menu_selection(Node **root, int choice) {
             break;
 
         case INSERT:
+            insert(root);
             break;
 
         case DELETE:
@@ -396,4 +397,32 @@ void menu_selection(Node **root, int choice) {
         case SHUFFLE:
             break;
     }
+}
+
+int insert(Node **root) {
+    Record *newRecord = (Record*)malloc(sizeof(Record*));
+    if (newRecord == NULL)
+        return 0;
+    
+    gets(newRecord->title); // temp
+    printf("What is the Film Title: ");
+    gets(newRecord->title);
+    printf("Who is the Director: ");
+    gets(newRecord->director);
+    printf("Write a description: ");
+    gets(newRecord->description);
+    printf("What is the genre: ");
+    gets(newRecord->genre);
+    printf("What is the running time hours: ");
+    scanf("%d", &(newRecord->duration.hours));
+    printf("What is the running time minutes: ");
+    scanf("%d", &(newRecord->duration.minutes));
+    printf("What year did the %s come out: ", newRecord->title);
+    scanf("%d", &(newRecord->year));
+    printf("How much times has it been played: ");
+    scanf("%d", &(newRecord->n_played));
+    printf("What is the rating: ");
+    scanf("%d", &(newRecord->rating));
+
+    push(root, *newRecord);
 }

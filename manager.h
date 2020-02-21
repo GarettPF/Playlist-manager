@@ -146,4 +146,13 @@ Description: Determines what to do with the user given choice
 */
 void menu_selection(Node **root, int choice);
 
+/*
+Function: insert
+Description: creates a new node and inserts it to the front
+    asking the user for information to store
+    @param **root           root ptr ptr to the linked list
+    @return                 1 if successful & 0 for error
+*/
+int insert(Node **root);
+
 #endif // #ifndef _MANAGER_H_
