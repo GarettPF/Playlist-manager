@@ -377,6 +377,7 @@ void menu_selection(Node **root, int choice) {
             break;
 
         case DELETE:
+            delete(root);
             break;
 
         case EDIT:
@@ -425,4 +426,32 @@ int insert(Node **root) {
     scanf("%d", &(newRecord->rating));
 
     push(root, *newRecord);
+}
+
+void delete(Node **root) {
+    char title[100];
+    Node *current = *root, *prev;
+
+    if (isEmpty(*root))
+        return;
+    
+    system("cls");
+    printf("Enter the movie title to delete: ");
+    gets(title); // temp for \n
+    gets(title);
+
+    if (!strcmp(current->data.title, title)) {
+        *root = current->next;
+        free(current);
+    } else {
+        while (current->next != NULL) {
+            prev = current;
+            current = current->next;
+
+            if (!strcmp(current->data.title, title)) {
+                prev->next = current->next;
+                free(current);
+            }
+        }
+    }
 }

@@ -155,4 +155,12 @@ Description: creates a new node and inserts it to the front
 */
 int insert(Node **root);
 
+/*
+Function: delete
+Description: Deletes any movie by title provided by the user
+    @param **root           root ptr ptr to the linked list
+    @return                 void
+*/
+void delete(Node **root);
+
 #endif // #ifndef _MANAGER_H_
