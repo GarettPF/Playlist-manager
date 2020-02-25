@@ -40,6 +40,62 @@ int push(Node **root_ptr, Record values) {
     return 1;
 }
 
+int insert(Node **root) {
+    Record *newRecord = (Record*)malloc(sizeof(Record*));
+    if (newRecord == NULL)
+        return 0;
+    
+    gets(newRecord->title); // temp
+    printf("What is the Film Title: ");
+    gets(newRecord->title);
+    printf("Who is the Director: ");
+    gets(newRecord->director);
+    printf("Write a description: ");
+    gets(newRecord->description);
+    printf("What is the genre: ");
+    gets(newRecord->genre);
+    printf("What is the running time hours: ");
+    scanf("%d", &(newRecord->duration.hours));
+    printf("What is the running time minutes: ");
+    scanf("%d", &(newRecord->duration.minutes));
+    printf("What year did the %s come out: ", newRecord->title);
+    scanf("%d", &(newRecord->year));
+    printf("How much times has it been played: ");
+    scanf("%d", &(newRecord->n_played));
+    printf("What is the rating: ");
+    scanf("%d", &(newRecord->rating));
+
+    push(root, *newRecord);
+}
+
+void delete(Node **root) {
+    char title[100];
+    Node *current = *root, *prev;
+
+    if (isEmpty(*root))
+        return;
+    
+    system("cls");
+    printf("Enter the movie title to delete: ");
+    gets(title); // temp for \n
+    gets(title);
+
+    if (!strcmp(current->data.title, title)) {
+        *root = current->next;
+        free(current);
+    } else {
+        while (current->next != NULL) {
+            prev = current;
+            current = current->next;
+
+            if (!strcmp(current->data.title, title)) {
+                prev->next = current->next;
+                free(current);
+            }
+        }
+    }
+}
+
 // ############# PLAYLIST FUNCTIONS ############
 
 int load(Node **root) {
@@ -400,58 +456,3 @@ void menu_selection(Node **root, int choice) {
     }
 }
 
-int insert(Node **root) {
-    Record *newRecord = (Record*)malloc(sizeof(Record*));
-    if (newRecord == NULL)
-        return 0;
-    
-    gets(newRecord->title); // temp
-    printf("What is the Film Title: ");
-    gets(newRecord->title);
-    printf("Who is the Director: ");
-    gets(newRecord->director);
-    printf("Write a description: ");
-    gets(newRecord->description);
-    printf("What is the genre: ");
-    gets(newRecord->genre);
-    printf("What is the running time hours: ");
-    scanf("%d", &(newRecord->duration.hours));
-    printf("What is the running time minutes: ");
-    scanf("%d", &(newRecord->duration.minutes));
-    printf("What year did the %s come out: ", newRecord->title);
-    scanf("%d", &(newRecord->year));
-    printf("How much times has it been played: ");
-    scanf("%d", &(newRecord->n_played));
-    printf("What is the rating: ");
-    scanf("%d", &(newRecord->rating));
-
-    push(root, *newRecord);
-}
-
-void delete(Node **root) {
-    char title[100];
-    Node *current = *root, *prev;
-
-    if (isEmpty(*root))
-        return;
-    
-    system("cls");
-    printf("Enter the movie title to delete: ");
-    gets(title); // temp for \n
-    gets(title);
-
-    if (!strcmp(current->data.title, title)) {
-        *root = current->next;
-        free(current);
-    } else {
-        while (current->next != NULL) {
-            prev = current;
-            current = current->next;
-
-            if (!strcmp(current->data.title, title)) {
-                prev->next = current->next;
-                free(current);
-            }
-        }
-    }
-}

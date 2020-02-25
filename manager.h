@@ -64,6 +64,23 @@ Description: Pushes the values into a new node
 */
 int push(Node **root_ptr, Record values);
 
+/*
+Function: insert
+Description: creates a new node and inserts it to the front
+    asking the user for information to store
+    @param **root           root ptr ptr to the linked list
+    @return                 1 if successful & 0 for error
+*/
+int insert(Node **root);
+
+/*
+Function: delete
+Description: Deletes any movie by title provided by the user
+    @param **root           root ptr ptr to the linked list
+    @return                 void
+*/
+void delete(Node **root);
+
 // ############# PLAYLIST FUNCTIONS ####################################
 
 /*
@@ -145,22 +162,5 @@ Description: Determines what to do with the user given choice
     @return                 void
 */
 void menu_selection(Node **root, int choice);
-
-/*
-Function: insert
-Description: creates a new node and inserts it to the front
-    asking the user for information to store
-    @param **root           root ptr ptr to the linked list
-    @return                 1 if successful & 0 for error
-*/
-int insert(Node **root);
-
-/*
-Function: delete
-Description: Deletes any movie by title provided by the user
-    @param **root           root ptr ptr to the linked list
-    @return                 void
-*/
-void delete(Node **root);
 
 #endif // #ifndef _MANAGER_H_
