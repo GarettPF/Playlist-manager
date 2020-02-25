@@ -65,7 +65,7 @@ int insert(Node **root) {
     printf("What is the rating: ");
     scanf("%d", &(newRecord->rating));
 
-    push(root, *newRecord);
+    return push(root, *newRecord);
 }
 
 void delete(Node **root) {

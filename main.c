@@ -7,11 +7,19 @@
 ************************************************************/
 
 #include "manager.h"
+#include "test.h"
 
 int main(void) {
     int done = 0, choice;
     Node *root = NULL;
     srand(time(NULL));
+
+    // test functions
+    test_insert();
+    test_delete();
+    // Node *test_root = NULL;
+    load(&test_root);
+    test_shuffle();
 
     while (!done) {
         do {
@@ -27,7 +35,8 @@ int main(void) {
         if (isEmpty(root) && choice != 1) {
             puts("List is empty\n");
             system("pause");
-        } else if (choice == EXIT) {
+        } 
+        if (choice == EXIT) {
             done = 1;
         } else {
             menu_selection(&root, choice);
