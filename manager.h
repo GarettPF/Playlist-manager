@@ -163,4 +163,14 @@ Description: Determines what to do with the user given choice
 */
 void menu_selection(Node **root, int choice);
 
+/*
+Function: shuffle
+Description: This will create a random order and traverse
+    throughout the linked list to satisfy the order
+    of the random order generated
+    @param *root            root ptr to the linked list
+    @return                 void
+*/
+void shuffle(Node *root);
+
 #endif // #ifndef _MANAGER_H_

@@ -11,6 +11,7 @@
 int main(void) {
     int done = 0, choice;
     Node *root = NULL;
+    srand(time(NULL));
 
     while (!done) {
         do {

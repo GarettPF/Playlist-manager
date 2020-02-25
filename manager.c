@@ -452,7 +452,68 @@ void menu_selection(Node **root, int choice) {
             break;
 
         case SHUFFLE:
+            shuffle(*root);
             break;
     }
 }
 
+void shuffle(Node *root) {
+    Node *counter = root;
+    int count = 0, num, *pos;
+
+    // get the amount of movies
+    while (counter != NULL) {
+        count++;
+        counter = counter->next;
+    }
+
+    // create random order
+    int *order = (int*)malloc(sizeof(int*) * count),
+        j, i;
+    for (i = 0; i < count; ++i) {
+        num = rand() % count + 1;
+        *(order + i) = num;
+
+        j = i - 1;
+        while (j >= 0) {
+            if (*(order + j--) == *(order + i))
+                i -= 1;
+        }
+    }
+
+    // for (int i = 0; i < count; i++) {
+    //     printf("%d ", *(order + i));
+    // }
+
+    // play movies in this order
+    int pos_n = 1;
+    i = 0;
+    while (i < count) {
+        if (pos_n == *(order + i)) {
+            system("cls");
+            printf("Title: %s\n", root->data.title);
+            printf("Director: %s\n", root->data.director);
+            printf("Description: %s\n", root->data.description);
+            printf("Genre: %s\n", root->data.genre);
+            printf("duration: %d:%d\n", root->data.duration.hours,
+                            root->data.duration.minutes);
+            printf("year: %d\n", root->data.year);
+            printf("Times played: %d\n", root->data.n_played);
+            printf("Rating: %d\n", root->data.rating);
+
+            delay(2);
+            i++;
+        }
+        if (pos_n < *(order + i)) {
+            pos_n++;
+            root = root->next;
+        }
+        if (pos_n > *(order + i)) {
+            pos_n--;
+            root = root->prev;
+        }
+    }
+
+    puts("finished playing");
+    system("pause");
+}
